@@ -11,7 +11,6 @@ export interface ITask extends Document {
   updated_at: Date;
 }
 
-// Define Task schema
 const taskSchema: Schema<ITask> = new Schema({
   title: { type: String, required: true },
   description: { type: String, required: true },
@@ -22,7 +21,7 @@ const taskSchema: Schema<ITask> = new Schema({
   },
   priority: {
     type: String,
-    enum: ["low", "medium", "hard"],
+    enum: ["low", "medium", "high"],
     default: "low",
   },
   due_date: { type: Date, required: true },

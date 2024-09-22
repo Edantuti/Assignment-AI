@@ -4,8 +4,8 @@ import { hashPassword, isPasswordCorrect } from "../utils";
 import { generateToken } from "../utils";
 import { MongooseError } from "mongoose";
 export const loginUser = async (req: Request, res: Response) => {
+  console.log(req.body);
   const { email, password } = req.body;
-
   try {
     const user = await User.findOne({ email });
     if (!user) {

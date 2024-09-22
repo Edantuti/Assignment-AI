@@ -25,7 +25,7 @@ export const getTaskById = async (req: Request, res: Response) => {
 
 export const createTask = async (req: Request, res: Response) => {
   const { title, description, status, priority, due_date } = req.body;
-
+  console.log(req.body);
   const { id } = req.user!;
   const task = new Task({
     title,
@@ -50,15 +50,21 @@ export const updateTask = async (req: Request, res: Response) => {
     if (!task) {
       return res.status(404).json({ message: "Task not found" });
     }
+    await Task.updateOne(
+      {
+        _id: task._id,
+      },
+      {
+        title: req.body.title || task.title,
+        description: req.body.description || task.description,
+        status: req.body.status || task.status,
+        priority: req.body.priority || task.priority,
+        due_date: req.body.due_date || task.due_date,
+      },
+    );
 
-    task.title = req.body.title || task.title;
-    task.description = req.body.description || task.description;
-    task.status = req.body.status || task.status;
-    task.priority = req.body.priority || task.priority;
-    task.due_date = req.body.due_date || task.due_date;
-
-    const updatedTask = await task.save();
-    res.status(200).json(updatedTask);
+    const newTask = await Task.findById(req.params.id);
+    res.status(200).json(newTask);
   } catch (err: any) {
     res.status(400).json({ message: err.message });
   }
