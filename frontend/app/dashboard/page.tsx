@@ -1,6 +1,5 @@
 import { DataTable } from "@/components/data-table";
 import { Board } from "@/components/kanban";
-import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { TaskProvider } from "@/provider/TaskProvider";
 
